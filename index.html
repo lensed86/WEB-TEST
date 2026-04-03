@@ -1,0 +1,1389 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>iPhone 16 시리즈 — Apple</title>
+  <style>
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg-dark: #000;
+      --bg-light: #fff;
+      --bg-gray: #f5f5f7;
+      --text-dark: #1d1d1f;
+      --text-light: #f5f5f7;
+      --text-muted: #6e6e73;
+      --accent-blue: #0071e3;
+      --accent-blue-hover: #0077ed;
+      --pro-gold: #b08d57;
+      --pro-black: #2c2c2e;
+      --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+      --nav-h: 48px;
+      --transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font);
+      background: var(--bg-dark);
+      color: var(--text-light);
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    /* ── Scroll Animation ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ══════════════════════════════════════
+       NAV
+    ══════════════════════════════════════ */
+    #nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      height: var(--nav-h);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      transition: background var(--transition);
+    }
+    #nav.light {
+      background: rgba(255,255,255,0.85);
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+    }
+    .nav-inner {
+      width: 100%;
+      max-width: 1020px;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      font-size: 21px;
+      font-weight: 300;
+      letter-spacing: -0.5px;
+      color: var(--text-light);
+      transition: color var(--transition);
+    }
+    #nav.light .nav-logo { color: var(--text-dark); }
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 12px;
+      letter-spacing: 0.02em;
+      color: rgba(255,255,255,0.85);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: #fff; }
+    #nav.light .nav-links a { color: var(--text-muted); }
+    #nav.light .nav-links a:hover { color: var(--text-dark); }
+    .nav-cta {
+      font-size: 12px;
+      color: var(--accent-blue);
+      font-weight: 400;
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+    }
+
+    /* ══════════════════════════════════════
+       HERO
+    ══════════════════════════════════════ */
+    #hero {
+      min-height: 100vh;
+      background: #000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 24px 60px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-eyebrow {
+      font-size: 17px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--pro-gold);
+      margin-bottom: 16px;
+      text-transform: uppercase;
+    }
+    .hero-title {
+      font-size: clamp(52px, 9vw, 96px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      background: linear-gradient(135deg, #fff 0%, #a0a0a0 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 20px;
+    }
+    .hero-sub {
+      font-size: clamp(17px, 2.5vw, 24px);
+      font-weight: 400;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.5;
+      max-width: 560px;
+      margin: 0 auto 40px;
+    }
+    .hero-btns {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 80px;
+    }
+    .btn-primary {
+      display: inline-block;
+      padding: 12px 28px;
+      background: var(--accent-blue);
+      color: #fff;
+      border-radius: 980px;
+      font-size: 17px;
+      font-weight: 400;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn-primary:hover {
+      background: var(--accent-blue-hover);
+      transform: scale(1.03);
+    }
+    .btn-secondary {
+      display: inline-block;
+      padding: 12px 28px;
+      background: transparent;
+      color: var(--accent-blue);
+      border: 1.5px solid var(--accent-blue);
+      border-radius: 980px;
+      font-size: 17px;
+      font-weight: 400;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn-secondary:hover {
+      background: rgba(0, 113, 227, 0.1);
+      transform: scale(1.03);
+    }
+
+    /* iPhone CSS mockup */
+    .phone-mockup {
+      position: relative;
+      width: 160px;
+      height: 300px;
+      border-radius: 36px;
+      background: linear-gradient(160deg, #1c1c1e, #2c2c2e);
+      border: 2px solid rgba(255,255,255,0.18);
+      box-shadow:
+        0 0 0 1px rgba(0,0,0,0.5),
+        0 40px 80px rgba(0,0,0,0.8),
+        inset 0 0 0 1px rgba(255,255,255,0.05);
+      margin: 0 auto 20px;
+      overflow: hidden;
+    }
+    .phone-screen {
+      position: absolute;
+      inset: 10px;
+      border-radius: 28px;
+      background: linear-gradient(160deg, #111 0%, #1a1a2e 40%, #16213e 100%);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .phone-screen::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 80px; height: 28px;
+      background: #000;
+      border-radius: 0 0 18px 18px;
+    }
+    .phone-logo {
+      font-size: 36px;
+      color: rgba(255,255,255,0.8);
+      line-height: 1;
+    }
+    .phone-side-btn {
+      position: absolute;
+      right: -4px;
+      top: 80px;
+      width: 4px;
+      height: 52px;
+      background: #3a3a3c;
+      border-radius: 0 3px 3px 0;
+    }
+    .phone-side-btn::after {
+      content: '';
+      position: absolute;
+      top: 68px;
+      width: 4px;
+      height: 72px;
+      background: #3a3a3c;
+      border-radius: 0 3px 3px 0;
+    }
+    /* camera pill */
+    .phone-camera {
+      position: absolute;
+      top: 14px; right: 14px;
+      width: 48px; height: 48px;
+      background: #111;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.08);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px;
+      padding: 6px;
+    }
+    .lens {
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #2a2a2a, #111);
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,255,255,0.4);
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      animation: bounce 2s infinite;
+    }
+    .scroll-arrow {
+      width: 20px;
+      height: 20px;
+      border-right: 1.5px solid rgba(255,255,255,0.4);
+      border-bottom: 1.5px solid rgba(255,255,255,0.4);
+      transform: rotate(45deg);
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(8px); }
+    }
+
+    /* ══════════════════════════════════════
+       SECTION HELPERS
+    ══════════════════════════════════════ */
+    .section-title {
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      text-align: center;
+      margin-bottom: 12px;
+    }
+    .section-sub {
+      font-size: clamp(14px, 1.8vw, 19px);
+      color: var(--text-muted);
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 56px;
+      line-height: 1.6;
+    }
+    section { padding: 96px 24px; }
+
+    /* ══════════════════════════════════════
+       LINEUP
+    ══════════════════════════════════════ */
+    #lineup {
+      background: var(--bg-gray);
+      color: var(--text-dark);
+    }
+    .lineup-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .lineup-card {
+      border-radius: 20px;
+      padding: 40px 28px 32px;
+      min-height: 380px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .lineup-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.2);
+    }
+    .card-pro-max {
+      background: linear-gradient(140deg, #2c2c2e 0%, #1c1c1e 60%, #3a2d0a 100%);
+      color: #fff;
+    }
+    .card-pro {
+      background: linear-gradient(140deg, #1c1c1e 0%, #2c2c2e 100%);
+      color: #fff;
+    }
+    .card-plus {
+      background: linear-gradient(140deg, #f5f5f7 0%, #e8e8ed 100%);
+      color: var(--text-dark);
+    }
+    .card-standard {
+      background: linear-gradient(140deg, #e8f4fd 0%, #fce4ec 100%);
+      color: var(--text-dark);
+    }
+    .card-badge {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 980px;
+      background: rgba(255,255,255,0.15);
+      width: fit-content;
+      margin-bottom: 20px;
+    }
+    .card-pro-max .card-badge,
+    .card-pro .card-badge { background: rgba(176, 141, 87, 0.3); color: var(--pro-gold); }
+    .card-plus .card-badge,
+    .card-standard .card-badge { background: rgba(0,0,0,0.08); color: var(--text-muted); }
+    .card-model {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 10px;
+    }
+    .card-tagline {
+      font-size: 14px;
+      line-height: 1.5;
+      opacity: 0.75;
+      margin-bottom: 24px;
+    }
+    .card-phone-mini {
+      width: 64px;
+      height: 110px;
+      border-radius: 14px;
+      border: 1.5px solid rgba(255,255,255,0.2);
+      margin: 0 auto 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    .card-plus .card-phone-mini,
+    .card-standard .card-phone-mini { border-color: rgba(0,0,0,0.12); }
+    .card-phone-screen {
+      position: absolute;
+      inset: 4px;
+      border-radius: 10px;
+      background: rgba(0,0,0,0.6);
+    }
+    .card-plus .card-phone-screen,
+    .card-standard .card-phone-screen { background: rgba(0,0,0,0.08); }
+    .card-phone-notch {
+      position: absolute;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 28px; height: 8px;
+      background: #000;
+      border-radius: 0 0 8px 8px;
+    }
+    .card-price {
+      font-size: 13px;
+      opacity: 0.6;
+    }
+    .card-price span {
+      font-size: 20px;
+      font-weight: 600;
+      opacity: 1;
+    }
+    .card-link {
+      display: inline-block;
+      margin-top: 12px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--accent-blue);
+    }
+    .card-link::after { content: ' →'; }
+
+    /* ══════════════════════════════════════
+       FEATURES
+    ══════════════════════════════════════ */
+    #features { background: #000; }
+    .feature-block {
+      display: flex;
+      align-items: center;
+      gap: 64px;
+      max-width: 1000px;
+      margin: 0 auto 96px;
+    }
+    .feature-block:last-child { margin-bottom: 0; }
+    .feature-block.reverse { flex-direction: row-reverse; }
+    .feature-text { flex: 1; }
+    .feature-eyebrow {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--pro-gold);
+      margin-bottom: 12px;
+    }
+    .feature-title {
+      font-size: clamp(28px, 3.5vw, 44px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+    .feature-desc {
+      font-size: 17px;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.65);
+    }
+    .feature-visual {
+      flex: 1;
+      border-radius: 24px;
+      overflow: hidden;
+      min-height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    /* Camera visual */
+    .vis-camera {
+      background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+      width: 100%;
+      height: 320px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .camera-array {
+      width: 160px;
+      height: 160px;
+      background: #111;
+      border-radius: 40px;
+      border: 1px solid rgba(255,255,255,0.08);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      padding: 18px;
+      position: relative;
+    }
+    .camera-array::after {
+      content: '';
+      position: absolute;
+      bottom: 20px; right: 20px;
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #2a2a2a, #111);
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+    .big-lens {
+      grid-column: 1 / -1;
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #1a3a5c, #0a1a2e);
+      border: 2px solid rgba(255,255,255,0.2);
+      margin: 0 auto;
+      box-shadow: 0 0 20px rgba(0, 100, 200, 0.3);
+    }
+    .small-lens {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #2a2a2a, #111);
+      border: 1px solid rgba(255,255,255,0.15);
+      margin: 0 auto;
+    }
+    /* Chip visual */
+    .vis-chip {
+      background: linear-gradient(135deg, #1c1c1e, #2c2c2e);
+      width: 100%;
+      height: 320px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .chip-block {
+      width: 140px;
+      height: 140px;
+      background: linear-gradient(135deg, #3a3a3c, #2c2c2e);
+      border-radius: 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    }
+    .chip-label {
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+    }
+    .chip-name {
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      background: linear-gradient(135deg, #fff 0%, var(--pro-gold) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .chip-sub {
+      font-size: 12px;
+      color: rgba(255,255,255,0.5);
+    }
+    /* Stat bars */
+    .stat-bar-wrap { margin-top: 28px; }
+    .stat-row { margin-bottom: 14px; }
+    .stat-label {
+      font-size: 13px;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 6px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .stat-bg {
+      height: 6px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .stat-fill {
+      height: 100%;
+      border-radius: 3px;
+      background: linear-gradient(90deg, var(--accent-blue), #5ac8fa);
+      width: 0;
+      transition: width 1.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .stat-fill.gold {
+      background: linear-gradient(90deg, var(--pro-gold), #f5d08a);
+    }
+    /* Battery visual */
+    .vis-battery {
+      background: linear-gradient(135deg, #0a2a1a, #0d3b24);
+      width: 100%;
+      height: 320px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px;
+    }
+    .battery-chart { width: 100%; }
+    .battery-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .battery-model {
+      font-size: 12px;
+      color: rgba(255,255,255,0.7);
+      width: 100px;
+      flex-shrink: 0;
+    }
+    .battery-bar-bg {
+      flex: 1;
+      height: 28px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .battery-bar {
+      height: 100%;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      padding-left: 10px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #000;
+      width: 0;
+      transition: width 1.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    /* ProRes visual */
+    .vis-video {
+      background: #000;
+      width: 100%;
+      height: 320px;
+      border-radius: 24px;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .video-frame {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #0d0d0d 0%, #1a0a2e 50%, #2a0a0a 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .rec-dot {
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: #ff3b30;
+      box-shadow: 0 0 12px rgba(255, 59, 48, 0.6);
+      animation: pulse-red 1.5s infinite;
+      position: absolute;
+      top: 20px; left: 20px;
+    }
+    @keyframes pulse-red {
+      0%, 100% { opacity: 1; box-shadow: 0 0 12px rgba(255,59,48,0.6); }
+      50% { opacity: 0.4; box-shadow: 0 0 4px rgba(255,59,48,0.3); }
+    }
+    .rec-label {
+      position: absolute;
+      top: 16px; left: 38px;
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      color: #ff3b30;
+      font-weight: 600;
+    }
+    .video-badge {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.15);
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+    .video-sub-badge {
+      font-size: 12px;
+      color: rgba(255,255,255,0.5);
+    }
+    @media (max-width: 768px) {
+      .feature-block, .feature-block.reverse { flex-direction: column; gap: 32px; }
+    }
+
+    /* ══════════════════════════════════════
+       COLORS
+    ══════════════════════════════════════ */
+    #colors {
+      background: var(--bg-dark);
+      text-align: center;
+    }
+    .color-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+    .color-tab {
+      padding: 8px 20px;
+      border-radius: 980px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      border: 1.5px solid rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.6);
+      transition: all 0.2s;
+      background: transparent;
+    }
+    .color-tab.active {
+      background: #fff;
+      color: #000;
+      border-color: #fff;
+    }
+    .color-panel { display: none; }
+    .color-panel.active { display: block; }
+    .color-swatches {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+    .swatch {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      border: 2px solid transparent;
+    }
+    .swatch:hover { transform: scale(1.15); }
+    .swatch.selected {
+      border-color: #fff;
+      box-shadow: 0 0 0 3px rgba(255,255,255,0.3);
+      transform: scale(1.1);
+    }
+    .swatch-name {
+      font-size: 14px;
+      color: rgba(255,255,255,0.65);
+      min-height: 22px;
+    }
+
+    /* ══════════════════════════════════════
+       PRICING
+    ══════════════════════════════════════ */
+    #pricing {
+      background: var(--bg-gray);
+      color: var(--text-dark);
+    }
+    #pricing .section-title { color: var(--text-dark); }
+    #pricing .section-sub { color: var(--text-muted); }
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .price-card {
+      background: #fff;
+      border-radius: 20px;
+      padding: 32px 24px;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      transition: transform 0.3s, box-shadow 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .price-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+    }
+    .price-card.featured::before {
+      content: '인기';
+      position: absolute;
+      top: 16px; right: 16px;
+      background: var(--accent-blue);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 980px;
+    }
+    .price-model { font-size: 20px; font-weight: 700; margin-bottom: 6px; }
+    .price-tagline { font-size: 13px; color: var(--text-muted); margin-bottom: 24px; }
+    .price-amount { font-size: 36px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 4px; }
+    .price-note { font-size: 12px; color: var(--text-muted); margin-bottom: 24px; }
+    .btn-buy {
+      display: block;
+      padding: 12px;
+      background: var(--accent-blue);
+      color: #fff;
+      border-radius: 980px;
+      font-size: 15px;
+      font-weight: 500;
+      transition: background 0.2s;
+      margin-bottom: 10px;
+    }
+    .btn-buy:hover { background: var(--accent-blue-hover); }
+    .btn-learn {
+      display: block;
+      padding: 12px;
+      color: var(--accent-blue);
+      font-size: 15px;
+      font-weight: 400;
+    }
+    .btn-learn:hover { text-decoration: underline; }
+    .price-features { list-style: none; text-align: left; margin-top: 20px; }
+    .price-features li {
+      font-size: 13px;
+      color: var(--text-muted);
+      padding: 6px 0;
+      border-bottom: 1px solid #f5f5f7;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .price-features li::before { content: '✓'; color: #34c759; font-weight: 700; }
+
+    /* ══════════════════════════════════════
+       FOOTER
+    ══════════════════════════════════════ */
+    footer {
+      background: #f5f5f7;
+      color: var(--text-muted);
+      padding: 48px 24px 32px;
+      border-top: 1px solid #d2d2d7;
+    }
+    .footer-links {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 32px;
+      max-width: 1000px;
+      margin: 0 auto 32px;
+    }
+    .footer-col h4 {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 12px;
+      letter-spacing: 0.01em;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 8px; }
+    .footer-col ul li a {
+      font-size: 12px;
+      color: var(--text-muted);
+      transition: color 0.2s;
+    }
+    .footer-col ul li a:hover { color: var(--text-dark); }
+    .footer-bottom {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding-top: 20px;
+      border-top: 1px solid #d2d2d7;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .footer-copy { font-size: 12px; }
+    .footer-legal {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .footer-legal a { font-size: 12px; color: var(--text-muted); }
+    .footer-legal a:hover { color: var(--text-dark); }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo">&#63743;</a>
+      <ul class="nav-links">
+        <li><a href="#lineup">라인업</a></li>
+        <li><a href="#features">기능</a></li>
+        <li><a href="#colors">색상</a></li>
+        <li><a href="#pricing">구매</a></li>
+      </ul>
+      <a href="#pricing" class="nav-cta">구매하기 →</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <p class="hero-eyebrow reveal">iPhone 16 시리즈</p>
+    <h1 class="hero-title reveal reveal-delay-1">일상을<br>다시 상상하다.</h1>
+    <p class="hero-sub reveal reveal-delay-2">
+      Apple Intelligence. 카메라 컨트롤. A18 Pro 칩.<br>
+      네 가지 모델로 만나는 완전히 새로운 iPhone.
+    </p>
+    <div class="hero-btns reveal reveal-delay-3">
+      <a href="#pricing" class="btn-primary">구매하기</a>
+      <a href="#lineup" class="btn-secondary">더 알아보기</a>
+    </div>
+
+    <!-- iPhone mockup -->
+    <div class="phone-mockup reveal reveal-delay-4">
+      <div class="phone-screen">
+        <div class="phone-logo">&#63743;</div>
+        <div class="phone-camera">
+          <div class="big-lens"></div>
+          <div class="lens"></div>
+          <div class="lens"></div>
+        </div>
+        <div class="phone-notch" style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:80px;height:28px;background:#000;border-radius:0 0 18px 18px;"></div>
+      </div>
+      <div class="phone-side-btn"></div>
+    </div>
+
+    <div class="scroll-hint">
+      <span>스크롤</span>
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
+
+  <!-- LINEUP -->
+  <section id="lineup">
+    <h2 class="section-title reveal" style="color:var(--text-dark)">iPhone 16 라인업</h2>
+    <p class="section-sub reveal reveal-delay-1">어떤 iPhone을 선택해도 최고의 경험이 기다립니다.</p>
+    <div class="lineup-grid">
+      <div class="lineup-card card-pro-max reveal">
+        <div>
+          <div class="card-badge">NEW</div>
+          <div class="card-model">iPhone 16<br>Pro Max</div>
+          <p class="card-tagline">가장 강력한 Pro.<br>A18 Pro · 5배 망원 · 최장 배터리</p>
+        </div>
+        <div class="card-phone-mini">
+          <div class="card-phone-screen"></div>
+          <div class="card-phone-notch"></div>
+        </div>
+        <div>
+          <div class="card-price">₩ <span>1,799,000</span>부터</div>
+          <a href="#pricing" class="card-link">자세히 보기</a>
+        </div>
+      </div>
+
+      <div class="lineup-card card-pro reveal reveal-delay-1">
+        <div>
+          <div class="card-badge">NEW</div>
+          <div class="card-model">iPhone 16<br>Pro</div>
+          <p class="card-tagline">Pro. 더 작고, 더 강하게.<br>A18 Pro · 4K 120fps ProRes</p>
+        </div>
+        <div class="card-phone-mini">
+          <div class="card-phone-screen"></div>
+          <div class="card-phone-notch"></div>
+        </div>
+        <div>
+          <div class="card-price">₩ <span>1,550,000</span>부터</div>
+          <a href="#pricing" class="card-link">자세히 보기</a>
+        </div>
+      </div>
+
+      <div class="lineup-card card-plus reveal reveal-delay-2">
+        <div>
+          <div class="card-badge">NEW</div>
+          <div class="card-model">iPhone 16<br>Plus</div>
+          <p class="card-tagline">더 큰 화면, 더 긴 배터리.<br>A18 칩 · 카메라 컨트롤</p>
+        </div>
+        <div class="card-phone-mini" style="border-color:rgba(0,0,0,0.12)">
+          <div class="card-phone-screen" style="background:rgba(0,0,0,0.06)"></div>
+          <div class="card-phone-notch"></div>
+        </div>
+        <div>
+          <div class="card-price" style="color:var(--text-dark)">₩ <span>1,250,000</span>부터</div>
+          <a href="#pricing" class="card-link">자세히 보기</a>
+        </div>
+      </div>
+
+      <div class="lineup-card card-standard reveal reveal-delay-3">
+        <div>
+          <div class="card-badge">NEW</div>
+          <div class="card-model">iPhone 16</div>
+          <p class="card-tagline">색다른 일상의 시작.<br>A18 칩 · Apple Intelligence</p>
+        </div>
+        <div class="card-phone-mini" style="border-color:rgba(0,0,0,0.12)">
+          <div class="card-phone-screen" style="background:rgba(0,0,0,0.06)"></div>
+          <div class="card-phone-notch"></div>
+        </div>
+        <div>
+          <div class="card-price" style="color:var(--text-dark)">₩ <span>1,099,000</span>부터</div>
+          <a href="#pricing" class="card-link">자세히 보기</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section id="features">
+    <h2 class="section-title reveal">놀라운 기능들</h2>
+    <p class="section-sub reveal reveal-delay-1">카메라부터 칩셋까지, 모든 것이 새롭습니다.</p>
+
+    <!-- Camera Control -->
+    <div class="feature-block reveal">
+      <div class="feature-text">
+        <p class="feature-eyebrow">Camera Control</p>
+        <h3 class="feature-title">찰나의 순간을<br>놓치지 마세요.</h3>
+        <p class="feature-desc">
+          새로운 카메라 컨트롤 버튼 하나로 잠금 화면에서 바로 셔터를 누르세요.
+          슬라이드로 줌, 클릭으로 초점. 손가락이 기억하는 촬영 경험.
+        </p>
+        <p class="feature-desc" style="margin-top:12px;">
+          48MP Fusion 카메라 · 5배 광학 줌 · 야간 모드 · 포토그래픽 스타일
+        </p>
+      </div>
+      <div class="feature-visual">
+        <div class="vis-camera">
+          <div class="camera-array">
+            <div class="big-lens"></div>
+            <div class="small-lens"></div>
+            <div class="small-lens"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- A18 Pro -->
+    <div class="feature-block reverse reveal">
+      <div class="feature-text">
+        <p class="feature-eyebrow">A18 Pro 칩</p>
+        <h3 class="feature-title">처리 속도의<br>새 기준.</h3>
+        <p class="feature-desc">
+          3나노미터 공정의 A18 Pro는 전작 대비 CPU 15%, GPU 20% 향상.
+          Apple Intelligence를 온디바이스로 구동하는 Neural Engine 탑재.
+        </p>
+        <div class="stat-bar-wrap" id="stat-wrap">
+          <div class="stat-row">
+            <div class="stat-label"><span>CPU 성능</span><span>+15%</span></div>
+            <div class="stat-bg"><div class="stat-fill" data-width="92"></div></div>
+          </div>
+          <div class="stat-row">
+            <div class="stat-label"><span>GPU 성능</span><span>+20%</span></div>
+            <div class="stat-bg"><div class="stat-fill" data-width="85"></div></div>
+          </div>
+          <div class="stat-row">
+            <div class="stat-label"><span>Neural Engine</span><span>+38%</span></div>
+            <div class="stat-bg"><div class="stat-fill gold" data-width="96"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="feature-visual">
+        <div class="vis-chip">
+          <div class="chip-block">
+            <div class="chip-label">Apple</div>
+            <div class="chip-name">A18</div>
+            <div class="chip-sub">Pro</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ProRes Video -->
+    <div class="feature-block reveal">
+      <div class="feature-text">
+        <p class="feature-eyebrow">ProRes Video</p>
+        <h3 class="feature-title">4K 120fps.<br>영화 같은 일상.</h3>
+        <p class="feature-desc">
+          iPhone 최초로 4K 120fps ProRes 영상 촬영을 지원합니다.
+          Log 포맷으로 촬영하고 전문 편집 툴에서 완성하세요.
+          Apple Intelligence가 자동으로 최고의 편집을 제안합니다.
+        </p>
+      </div>
+      <div class="feature-visual">
+        <div class="vis-video">
+          <div class="video-frame">
+            <div class="rec-dot"></div>
+            <div class="rec-label">● REC</div>
+            <div class="video-badge">4K · 120fps · ProRes</div>
+            <div class="video-sub-badge">Log 포맷 지원 · Apple Intelligence 편집</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Battery -->
+    <div class="feature-block reverse reveal">
+      <div class="feature-text">
+        <p class="feature-eyebrow">Battery Life</p>
+        <h3 class="feature-title">충전 걱정 없이<br>온종일.</h3>
+        <p class="feature-desc">
+          iPhone 16 Pro Max는 최대 33시간 동영상 재생을 지원합니다.
+          MagSafe와 USB-C 고속 충전으로 30분에 50%까지 충전하세요.
+        </p>
+      </div>
+      <div class="feature-visual">
+        <div class="vis-battery">
+          <div class="battery-chart" id="battery-chart">
+            <div class="battery-row">
+              <div class="battery-model">Pro Max</div>
+              <div class="battery-bar-bg">
+                <div class="battery-bar" data-width="100" style="background:linear-gradient(90deg,#34c759,#30d158)">33시간</div>
+              </div>
+            </div>
+            <div class="battery-row">
+              <div class="battery-model">Pro</div>
+              <div class="battery-bar-bg">
+                <div class="battery-bar" data-width="82" style="background:linear-gradient(90deg,#34c759,#30d158)">27시간</div>
+              </div>
+            </div>
+            <div class="battery-row">
+              <div class="battery-model">Plus</div>
+              <div class="battery-bar-bg">
+                <div class="battery-bar" data-width="73" style="background:linear-gradient(90deg,#34c759,#30d158)">24시간</div>
+              </div>
+            </div>
+            <div class="battery-row">
+              <div class="battery-model">iPhone 16</div>
+              <div class="battery-bar-bg">
+                <div class="battery-bar" data-width="61" style="background:linear-gradient(90deg,#34c759,#30d158)">20시간</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COLORS -->
+  <section id="colors">
+    <h2 class="section-title reveal">나만의 색으로.</h2>
+    <p class="section-sub reveal reveal-delay-1">개성 있는 컬러 라인업으로 당신의 스타일을 표현하세요.</p>
+
+    <div class="color-tabs reveal reveal-delay-2">
+      <button class="color-tab active" onclick="switchModel('pro-max')">Pro Max</button>
+      <button class="color-tab" onclick="switchModel('pro')">Pro</button>
+      <button class="color-tab" onclick="switchModel('plus')">Plus</button>
+      <button class="color-tab" onclick="switchModel('standard')">iPhone 16</button>
+    </div>
+
+    <div id="panel-pro-max" class="color-panel active reveal">
+      <div class="color-swatches" id="swatches-pro-max">
+        <div class="swatch selected" style="background:#8e8175" title="블랙 티타늄" onclick="selectSwatch(this,'블랙 티타늄','pro-max')"></div>
+        <div class="swatch" style="background:#c8b99a" title="화이트 티타늄" onclick="selectSwatch(this,'화이트 티타늄','pro-max')"></div>
+        <div class="swatch" style="background:#b08d57" title="내추럴 티타늄" onclick="selectSwatch(this,'내추럴 티타늄','pro-max')"></div>
+        <div class="swatch" style="background:#4a4a54" title="데저트 티타늄" onclick="selectSwatch(this,'데저트 티타늄','pro-max')"></div>
+      </div>
+      <p class="swatch-name" id="name-pro-max">블랙 티타늄</p>
+    </div>
+
+    <div id="panel-pro" class="color-panel reveal">
+      <div class="color-swatches" id="swatches-pro">
+        <div class="swatch selected" style="background:#2c2c2e" title="블랙 티타늄" onclick="selectSwatch(this,'블랙 티타늄','pro')"></div>
+        <div class="swatch" style="background:#e5e0d5" title="화이트 티타늄" onclick="selectSwatch(this,'화이트 티타늄','pro')"></div>
+        <div class="swatch" style="background:#c0a870" title="내추럴 티타늄" onclick="selectSwatch(this,'내추럴 티타늄','pro')"></div>
+        <div class="swatch" style="background:#6b5f4b" title="데저트 티타늄" onclick="selectSwatch(this,'데저트 티타늄','pro')"></div>
+      </div>
+      <p class="swatch-name" id="name-pro">블랙 티타늄</p>
+    </div>
+
+    <div id="panel-plus" class="color-panel reveal">
+      <div class="color-swatches" id="swatches-plus">
+        <div class="swatch selected" style="background:#e8e8e8" title="화이트" onclick="selectSwatch(this,'화이트','plus')"></div>
+        <div class="swatch" style="background:#1c1c1e" title="블랙" onclick="selectSwatch(this,'블랙','plus')"></div>
+        <div class="swatch" style="background:#d4b4c8" title="핑크" onclick="selectSwatch(this,'핑크','plus')"></div>
+        <div class="swatch" style="background:#4a7c59" title="민트" onclick="selectSwatch(this,'민트','plus')"></div>
+      </div>
+      <p class="swatch-name" id="name-plus">화이트</p>
+    </div>
+
+    <div id="panel-standard" class="color-panel reveal">
+      <div class="color-swatches" id="swatches-standard">
+        <div class="swatch selected" style="background:#c8b4d4" title="딥 퍼플" onclick="selectSwatch(this,'딥 퍼플','standard')"></div>
+        <div class="swatch" style="background:#e8c4b8" title="핑크" onclick="selectSwatch(this,'핑크','standard')"></div>
+        <div class="swatch" style="background:#4a7c8c" title="틸" onclick="selectSwatch(this,'틸','standard')"></div>
+        <div class="swatch" style="background:#1c1c1e" title="블랙" onclick="selectSwatch(this,'블랙','standard')"></div>
+        <div class="swatch" style="background:#e8e8e8" title="화이트" onclick="selectSwatch(this,'화이트','standard')"></div>
+      </div>
+      <p class="swatch-name" id="name-standard">딥 퍼플</p>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing">
+    <h2 class="section-title reveal">어떤 iPhone을 선택하시겠어요?</h2>
+    <p class="section-sub reveal reveal-delay-1">Apple 보상 판매와 무이자 할부로 더욱 합리적으로.</p>
+    <div class="pricing-grid">
+      <div class="price-card reveal">
+        <div class="price-model">iPhone 16</div>
+        <div class="price-tagline">색다른 일상</div>
+        <div class="price-amount">₩1,099,000</div>
+        <div class="price-note">128GB 기준 · 부가세 포함</div>
+        <a href="#" class="btn-buy">구매하기</a>
+        <a href="#lineup" class="btn-learn">더 알아보기</a>
+        <ul class="price-features">
+          <li>A18 칩</li>
+          <li>48MP 카메라</li>
+          <li>카메라 컨트롤</li>
+          <li>Apple Intelligence</li>
+        </ul>
+      </div>
+
+      <div class="price-card reveal reveal-delay-1">
+        <div class="price-model">iPhone 16 Plus</div>
+        <div class="price-tagline">더 크고 오래가는</div>
+        <div class="price-amount">₩1,250,000</div>
+        <div class="price-note">128GB 기준 · 부가세 포함</div>
+        <a href="#" class="btn-buy">구매하기</a>
+        <a href="#lineup" class="btn-learn">더 알아보기</a>
+        <ul class="price-features">
+          <li>A18 칩</li>
+          <li>6.7인치 화면</li>
+          <li>24시간 배터리</li>
+          <li>Apple Intelligence</li>
+        </ul>
+      </div>
+
+      <div class="price-card featured reveal reveal-delay-2">
+        <div class="price-model">iPhone 16 Pro</div>
+        <div class="price-tagline">프로를 위한 프로</div>
+        <div class="price-amount">₩1,550,000</div>
+        <div class="price-note">128GB 기준 · 부가세 포함</div>
+        <a href="#" class="btn-buy">구매하기</a>
+        <a href="#lineup" class="btn-learn">더 알아보기</a>
+        <ul class="price-features">
+          <li>A18 Pro 칩</li>
+          <li>ProRes 4K 120fps</li>
+          <li>5배 망원</li>
+          <li>티타늄 디자인</li>
+        </ul>
+      </div>
+
+      <div class="price-card reveal reveal-delay-3">
+        <div class="price-model">iPhone 16 Pro Max</div>
+        <div class="price-tagline">가장 강력한 iPhone</div>
+        <div class="price-amount">₩1,799,000</div>
+        <div class="price-note">256GB 기준 · 부가세 포함</div>
+        <a href="#" class="btn-buy">구매하기</a>
+        <a href="#lineup" class="btn-learn">더 알아보기</a>
+        <ul class="price-features">
+          <li>A18 Pro 칩</li>
+          <li>33시간 배터리</li>
+          <li>6.9인치 화면</li>
+          <li>5배 망원</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-links">
+      <div class="footer-col">
+        <h4>쇼핑 및 알아보기</h4>
+        <ul>
+          <li><a href="#">iPhone 구매하기</a></li>
+          <li><a href="#">iPhone 비교하기</a></li>
+          <li><a href="#">Apple Trade In</a></li>
+          <li><a href="#">할부 구매</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>기능</h4>
+        <ul>
+          <li><a href="#">Apple Intelligence</a></li>
+          <li><a href="#">카메라</a></li>
+          <li><a href="#">배터리</a></li>
+          <li><a href="#">A18 Pro 칩</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>서비스</h4>
+        <ul>
+          <li><a href="#">AppleCare+</a></li>
+          <li><a href="#">iCloud+</a></li>
+          <li><a href="#">Apple One</a></li>
+          <li><a href="#">Apple Pay</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>지원</h4>
+        <ul>
+          <li><a href="#">iPhone 지원</a></li>
+          <li><a href="#">Genius Bar 예약</a></li>
+          <li><a href="#">설명서</a></li>
+          <li><a href="#">개발자</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">Copyright © 2025 Apple Inc. 모든 권리 보유. (팬메이드 데모 페이지)</p>
+      <div class="footer-legal">
+        <a href="#">개인정보 처리방침</a>
+        <a href="#">법적 고지</a>
+        <a href="#">사이트 맵</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ── Scroll Reveal (IntersectionObserver) ──
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          // Trigger stat bars
+          if (e.target.id === 'stat-wrap' || e.target.contains(document.getElementById('stat-wrap'))) {
+            triggerStatBars();
+          }
+          // Trigger battery bars
+          if (e.target.id === 'battery-chart' || e.target.contains(document.getElementById('battery-chart'))) {
+            triggerBatteryBars();
+          }
+        }
+      });
+    }, { threshold: 0.15 });
+    revealEls.forEach(el => observer.observe(el));
+
+    // Trigger stat bars on parent reveal
+    const featureBlocks = document.querySelectorAll('.feature-block');
+    const blockObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const bars = e.target.querySelectorAll('.stat-fill');
+          bars.forEach(b => { b.style.width = b.dataset.width + '%'; });
+          const bbars = e.target.querySelectorAll('.battery-bar');
+          bbars.forEach(b => { b.style.width = b.dataset.width + '%'; });
+        }
+      });
+    }, { threshold: 0.3 });
+    featureBlocks.forEach(el => blockObserver.observe(el));
+
+    function triggerStatBars() {
+      document.querySelectorAll('.stat-fill').forEach(b => {
+        b.style.width = b.dataset.width + '%';
+      });
+    }
+    function triggerBatteryBars() {
+      document.querySelectorAll('.battery-bar').forEach(b => {
+        b.style.width = b.dataset.width + '%';
+      });
+    }
+
+    // ── Nav Light/Dark on scroll ──
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      const lightSections = ['lineup', 'pricing'];
+      let isLight = false;
+      lightSections.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= 48 && rect.bottom > 48) isLight = true;
+        }
+      });
+      nav.classList.toggle('light', isLight);
+    });
+
+    // ── Color Tabs ──
+    function switchModel(model) {
+      document.querySelectorAll('.color-tab').forEach((t, i) => {
+        t.classList.toggle('active', ['pro-max','pro','plus','standard'][i] === model);
+      });
+      document.querySelectorAll('.color-panel').forEach(p => p.classList.remove('active'));
+      document.getElementById('panel-' + model).classList.add('active');
+    }
+
+    function selectSwatch(el, name, model) {
+      document.querySelectorAll('#swatches-' + model + ' .swatch').forEach(s => s.classList.remove('selected'));
+      el.classList.add('selected');
+      document.getElementById('name-' + model).textContent = name;
+    }
+
+    // ── Hero reveal on load ──
+    window.addEventListener('load', () => {
+      document.querySelectorAll('#hero .reveal').forEach((el, i) => {
+        setTimeout(() => el.classList.add('visible'), i * 150);
+      });
+    });
+  </script>
+</body>
+</html>
